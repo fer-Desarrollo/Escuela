@@ -1,0 +1,53 @@
+METODOS GET
+http://localhost/Escuela/api/carreras
+http://localhost/Escuela/api/turnos
+http://localhost/Escuela/api/grados
+http://localhost/Escuela/api/grupos
+http://localhost/Escuela/api/alumnos
+
+
+METODOS POST
+http://localhost/Escuela/api/carrera
+
+{
+  "nombre_carrera": "Ingeniería en Sistemas"
+}
+
+http://localhost/Escuela/api/turno
+
+{
+  "nombre_turno": "Matutino"
+}
+
+http://localhost/Escuela/api/grado
+
+{
+  "numero_grado": 1
+}
+
+http://localhost/Escuela/api/grupo
+
+{
+  "id_carrera": 1,
+  "id_turno": 1,
+  "id_grado": 1,
+  "grupo": "ISC-101V"
+}
+
+http://localhost/Escuela/api/alumno
+
+{
+  "nombre": "Fernando",
+  "apellido_paterno": "Garcia",
+  "apellido_materno": "Torres",
+  "id_grupo": 1
+}
+
+METODOS PUT (PARA ACTIVAR O DESACTIVAR)
+http://localhost/Escuela/api/alumno/1
+http://localhost/Escuela/api/carrera/1
+http://localhost/Escuela/api/grupo/1
+http://localhost/Escuela/api/turno/1
+http://localhost/Escuela/api/grado/1
+
+
