@@ -1,21 +1,60 @@
+<style>
+.form-box{
+    max-width:600px;
+    margin:auto;
+    background:#ffffff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.12);
+}
+.form-box h3{
+    text-align:center;
+    margin-bottom:25px;
+    color:#2c3e50;
+}
+.form-box label{
+    font-weight:600;
+    margin-top:10px;
+}
+.form-control{
+    border-radius:6px;
+}
+.btn-success{
+    width:100%;
+    font-weight:bold;
+    padding:10px;
+}
+select:focus, input:focus{
+    box-shadow:0 0 0 .15rem rgba(40,167,69,.25);
+}
+</style>
+
 <div class="container mt-4">
+<div class="form-box">
+
 <h3>Registrar Grupo</h3>
 
-<select id="carrera" class="form-control mb-2">
+<label>Carrera</label>
+<select id="carrera" class="form-control mb-3">
     <option value="">Seleccione carrera</option>
 </select>
 
-<select id="turno" class="form-control mb-2">
+<label>Turno</label>
+<select id="turno" class="form-control mb-3">
     <option value="">Seleccione turno</option>
 </select>
 
-<select id="grado" class="form-control mb-2">
+<label>Grado</label>
+<select id="grado" class="form-control mb-3">
     <option value="">Seleccione grado</option>
 </select>
 
-<input id="grupo" class="form-control mb-2" placeholder="Grupo">
+<label>Grupo</label>
+<input id="grupo" class="form-control mb-4" placeholder="Ej. A, B, C">
 
-<button class="btn btn-success" onclick="guardar()">Guardar</button>
+<button class="btn btn-success" onclick="guardar()">Guardar Grupo</button>
+
+</div>
 </div>
 
 <script>
@@ -29,7 +68,8 @@ fetch('<?= base_url("api/carreras") ?>')
 .then(r => r.json())
 .then(j => {
     j.data.forEach(c => {
-        carrera.innerHTML += `<option value="${c.id_carrera}">
+        carrera.innerHTML += `
+        <option value="${c.id_carrera}">
             ${c.nombre_carrera}
         </option>`;
     });
@@ -40,7 +80,8 @@ fetch('<?= base_url("api/turnos") ?>')
 .then(r => r.json())
 .then(j => {
     j.data.forEach(t => {
-        turno.innerHTML += `<option value="${t.id_turno}">
+        turno.innerHTML += `
+        <option value="${t.id_turno}">
             ${t.nombre_turno}
         </option>`;
     });
@@ -51,7 +92,8 @@ fetch('<?= base_url("api/grados") ?>')
 .then(r => r.json())
 .then(j => {
     j.data.forEach(g => {
-        grado.innerHTML += `<option value="${g.id_grado}">
+        grado.innerHTML += `
+        <option value="${g.id_grado}">
             ${g.numero_grado}
         </option>`;
     });

@@ -1,0 +1,47 @@
+/* Tarjeta */
+.grupo-card {
+    max-width: 450px;
+    margin: auto;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+/* Título */
+.grupo-card h3 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Labels */
+.form-label {
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* Inputs y selects */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    padding: 10px;
+    transition: all .2s ease;
+}
+
+/* Focus */
+.form-control:focus,
+.form-select:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.15rem rgba(40,167,69,.25);
+}
+
+/* Botón */
+.btn-guardar {
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all .2s ease;
+}
+
+.btn-guardar:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
