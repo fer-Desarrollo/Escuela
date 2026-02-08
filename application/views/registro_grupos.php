@@ -1,5 +1,4 @@
-<?php $this->load->view('layout/header'); ?>
-<?php $this->load->view('layout/navbar'); ?>
+
 
 <div class="container mt-4">
 <h3>Registrar Grupo</h3>
@@ -39,4 +38,4 @@ body:JSON.stringify({
 </script>
 
 <?php $this->load->view('layout/footer'); ?>
-<?php $this->load->view('layout/scripts'); ?>
+

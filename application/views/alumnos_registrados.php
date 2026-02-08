@@ -1,5 +1,4 @@
-<?php $this->load->view('layout/header'); ?>
-<?php $this->load->view('layout/navbar'); ?>
+
 
 <div class="container mt-4">
 <h3>Alumnos</h3>
@@ -41,5 +40,5 @@ function toggle(id){
 </script>
 
 <?php $this->load->view('layout/footer'); ?>
-<?php $this->load->view('layout/scripts'); ?>
+
  

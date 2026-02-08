@@ -1,5 +1,4 @@
-<?php $this->load->view('layout/header'); ?>
-<?php $this->load->view('layout/navbar'); ?>
+
 
 <div class="container mt-4">
 
@@ -82,21 +81,31 @@
 <script>
 // ==================== LISTADOS ====================
 const load = (url, tabla, campo, id) => {
-fetch(url).then(r=>r.json()).then(j=>{
-  tabla.innerHTML='';
-  j.data.forEach(x=>{
-    tabla.innerHTML += `
-    <tr>
-      <td>${x[campo]}</td>
-      <td>
-        <button class="btn btn-danger btn-sm" onclick="toggle('${url}/${x[id]}')">X</button>
-      </td>
-      <td>
-        <button class="btn btn-warning btn-sm" onclick="toggle('${url}/${x[id]}')">✔</button>
-      </td>
-    </tr>`;
-  });
-});
+  fetch(url)
+    .then(r => r.json())
+    .then(j => {
+      tabla.innerHTML = '';
+      j.data.forEach(x => {
+        tabla.innerHTML += `
+        <tr>
+          <td>${x[campo]}</td>
+          <td>
+            <button 
+              class="btn btn-danger btn-sm"
+              onclick="cambiarEstado('${url}/${x[id]}', 0)">
+              ❌
+            </button>
+          </td>
+          <td>
+            <button 
+              class="btn btn-success btn-sm"
+              onclick="cambiarEstado('${url}/${x[id]}', 1)">
+              ✔
+            </button>
+          </td>
+        </tr>`;
+      });
+    });
 };
 
 load('<?= base_url("api/carreras") ?>', tabla_carreras, 'nombre_carrera', 'id_carrera');
@@ -105,35 +114,44 @@ load('<?= base_url("api/grados") ?>', tabla_grados, 'numero_grado', 'id_grado');
 
 // ==================== REGISTROS ====================
 function registrarCarrera(){
- fetch('<?= base_url("api/carrera") ?>',{
-  method:'POST',
-  headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({nombre_carrera:carrera_nombre.value})
- }).then(()=>location.reload());
+  fetch('<?= base_url("api/carrera") ?>', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      nombre_carrera: carrera_nombre.value
+    })
+  }).then(() => location.reload());
 }
 
 function registrarTurno(){
- fetch('<?= base_url("api/turno") ?>',{
-  method:'POST',
-  headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({nombre_turno:turno_nombre.value})
- }).then(()=>location.reload());
+  fetch('<?= base_url("api/turno") ?>', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      nombre_turno: turno_nombre.value
+    })
+  }).then(() => location.reload());
 }
 
 function registrarGrado(){
- fetch('<?= base_url("api/grado") ?>',{
-  method:'POST',
-  headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({numero_grado:grado_numero.value})
- }).then(()=>location.reload());
+  fetch('<?= base_url("api/grado") ?>', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      numero_grado: grado_numero.value
+    })
+  }).then(() => location.reload());
 }
 
 // ==================== ACTIVAR / DESACTIVAR ====================
-function toggle(url){
- fetch(url,{method:'PUT'})
- .then(()=>location.reload());
+function cambiarEstado(url, estado){
+  fetch(url, {
+    method: 'PUT',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({estado})
+  }).then(() => location.reload());
 }
 </script>
 
 <?php $this->load->view('layout/footer'); ?>
-<?php $this->load->view('layout/scripts'); ?>
+
