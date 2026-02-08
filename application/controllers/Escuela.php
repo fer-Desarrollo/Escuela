@@ -92,6 +92,54 @@ class Escuela extends CI_Controller {
         echo json_encode(['status'=>true,'message'=>'Alumno registrado']);
     }
 
+    public function registrar_turno()
+    {
+        $j = $this->getJson();
+
+        if (empty($j['nombre_turno'])) {
+            echo json_encode([
+                'status'  => false,
+                'message' => 'El nombre del turno es obligatorio'
+            ]);
+            return;
+        }
+
+        $this->Turno_model->insertar([
+            'nombre_turno' => $j['nombre_turno']
+        ]);
+
+        echo json_encode([
+            'status'  => true,
+            'message' => 'Turno registrado correctamente'
+        ]);
+    }
+
+    public function registrar_grado()
+    {
+        $j = $this->getJson();
+
+        if (empty($j['numero_grado'])) {
+            echo json_encode([
+                'status'  => false,
+                'message' => 'El número del grado es obligatorio'
+            ]);
+            return;
+        }
+
+        $this->Grado_model->insertar([
+            'numero_grado' => $j['numero_grado']
+        ]);
+
+        echo json_encode([
+            'status'  => true,
+            'message' => 'Grado registrado correctamente'
+        ]);
+    }
+
+
+
+
+
     // =====================
     // ACTIVAR / DESACTIVAR
     // =====================

@@ -26,6 +26,8 @@ $route['api/grupos']   = 'Escuela/obtener_grupos';
 $route['api/carrera']  = 'Escuela/registrar_carrera';
 $route['api/grupo']    = 'Escuela/registrar_grupo';
 $route['api/alumno']   = 'Escuela/registrar_alumno';
+$route['api/turno']  = 'Escuela/registrar_turno';
+$route['api/grado']  = 'Escuela/registrar_grado';
 
 $route['api/alumnos']  = 'Escuela/listar_alumnos';
 

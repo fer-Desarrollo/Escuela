@@ -48,6 +48,6 @@ http://localhost/Escuela/api/alumno/1
 http://localhost/Escuela/api/carrera/1
 http://localhost/Escuela/api/grupo/1
 http://localhost/Escuela/api/turno/1
-http://localhost/Escuela/api/grado/1
+http://localhost/Escuela/api/grado/1 
 
 
