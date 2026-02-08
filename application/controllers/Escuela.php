@@ -24,7 +24,7 @@ class Escuela extends CI_Controller {
     // =====================
 
     public function obtener_carreras() {
-        echo json_encode(['status'=>true,'data'=>$this->Carrera_model->obtener_activas()]);
+        echo json_encode(['status'=>true,'data'=>$this->Carrera_model->obtener_todas()]);
     }
 
     public function obtener_turnos() {

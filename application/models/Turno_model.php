@@ -12,15 +12,16 @@ class Turno_model extends CI_Model {
 
     public function obtener_activos() {
         return $this->db
-            ->where('activo', 1)
             ->get($this->table)
             ->result();
     }
 
     public function cambiar_estado($id) {
-        $this->db->set('activo', '1 - activo', false)
-                 ->where($this->primaryKey, $id)
-                 ->update($this->table);
+        $this->db->query("
+            UPDATE {$this->table}
+            SET activo = IF(activo = 1, 0, 1)
+            WHERE {$this->primaryKey} = ?
+        ", [$id]);
 
         return $this->db->affected_rows() > 0;
     }

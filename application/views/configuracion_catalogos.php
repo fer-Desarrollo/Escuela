@@ -80,26 +80,29 @@
 
 <script>
 // ==================== LISTADOS ====================
-const load = (url, tabla, campo, id) => {
-  fetch(url)
+const load = (urlListar, urlToggle, tabla, campo, id) => {
+  fetch(urlListar)
     .then(r => r.json())
     .then(j => {
       tabla.innerHTML = '';
       j.data.forEach(x => {
+
+        const activo = x.activo == 1;
+        const claseFila = activo ? 'table-success' : 'table-danger';
+        const icono = activo ? '✔' : '❌';
+
         tabla.innerHTML += `
-        <tr>
+        <tr class="${claseFila}">
           <td>${x[campo]}</td>
           <td>
-            <button 
-              class="btn btn-danger btn-sm"
-              onclick="cambiarEstado('${url}/${x[id]}', 0)">
+            <button class="btn btn-danger btn-sm"
+              onclick="toggle('${urlToggle}/${x[id]}')">
               ❌
             </button>
           </td>
           <td>
-            <button 
-              class="btn btn-success btn-sm"
-              onclick="cambiarEstado('${url}/${x[id]}', 1)">
+            <button class="btn btn-success btn-sm"
+              onclick="toggle('${urlToggle}/${x[id]}')">
               ✔
             </button>
           </td>
@@ -108,48 +111,66 @@ const load = (url, tabla, campo, id) => {
     });
 };
 
-load('<?= base_url("api/carreras") ?>', tabla_carreras, 'nombre_carrera', 'id_carrera');
-load('<?= base_url("api/turnos") ?>', tabla_turnos, 'nombre_turno', 'id_turno');
-load('<?= base_url("api/grados") ?>', tabla_grados, 'numero_grado', 'id_grado');
+// ==================== CARGAS ====================
+load(
+  '<?= base_url("api/carreras") ?>',
+  '<?= base_url("api/carrera") ?>',
+  tabla_carreras,
+  'nombre_carrera',
+  'id_carrera'
+);
+
+load(
+  '<?= base_url("api/turnos") ?>',
+  '<?= base_url("api/turno") ?>',
+  tabla_turnos,
+  'nombre_turno',
+  'id_turno'
+);
+
+load(
+  '<?= base_url("api/grados") ?>',
+  '<?= base_url("api/grado") ?>',
+  tabla_grados,
+  'numero_grado',
+  'id_grado'
+);
+
+// ==================== TOGGLE ====================
+function toggle(url){
+  fetch(url,{ method:'PUT' })
+    .then(() => location.reload());
+}
 
 // ==================== REGISTROS ====================
 function registrarCarrera(){
-  fetch('<?= base_url("api/carrera") ?>', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      nombre_carrera: carrera_nombre.value
-    })
-  }).then(() => location.reload());
+ fetch('<?= base_url("api/carrera") ?>',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({nombre_carrera:carrera_nombre.value})
+ }).then(()=>location.reload());
 }
 
 function registrarTurno(){
-  fetch('<?= base_url("api/turno") ?>', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      nombre_turno: turno_nombre.value
-    })
-  }).then(() => location.reload());
+ fetch('<?= base_url("api/turno") ?>',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({nombre_turno:turno_nombre.value})
+ }).then(()=>location.reload());
 }
 
 function registrarGrado(){
-  fetch('<?= base_url("api/grado") ?>', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      numero_grado: grado_numero.value
-    })
-  }).then(() => location.reload());
+ fetch('<?= base_url("api/grado") ?>',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({numero_grado:grado_numero.value})
+ }).then(()=>location.reload());
 }
 
 // ==================== ACTIVAR / DESACTIVAR ====================
-function cambiarEstado(url, estado){
-  fetch(url, {
-    method: 'PUT',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({estado})
-  }).then(() => location.reload());
+function toggle(url){
+ fetch(url,{method:'PUT'})
+ .then(()=>location.reload());
 }
 </script>
 
